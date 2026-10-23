@@ -1,0 +1,103 @@
+# --- ЗАЛЕЖНОСТІ ТА ЗБІРКА (Dependencies & Build) ---
+node_modules/
+dist/
+dist-ssr/
+build/
+out/
+.cache/
+.parcel-cache/
+
+# --- ПАКЕТНІ МЕНЕДЖЕРИ (npm, yarn, pnpm) ---
+# Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.hwc
+.yarn/install-state.gz
+.yarn/oj-state.gz
+
+# PNPM
+.pnpm-store/
+
+# Логи пакетних менеджерів
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# --- ШРИФТИ (Fonts Automation) ---
+# Ігноруємо результати (веб-формати)
+src/fonts/*.woff
+src/fonts/*.woff2
+
+# ДОЗВОЛЯЄМО вхідні оригінали (джерело)
+!src/fonts/src/
+!src/fonts/src/**/*
+
+# --- ЗОБРАЖЕННЯ ТА СПРАЙТИ (Images Automation) ---
+# Ігноруємо ВСЕ у папці виходу src/assets/images/
+src/assets/images/**/*
+
+# ДОЗВОЛЯЄМО вхідні дані всередині глобальних папок
+!src/assets/images/**/src/
+!src/assets/images/**/src/**/*
+!src/assets/images/**/sprite-src/
+!src/assets/images/**/sprite-src/**/*
+
+# Ігноруємо готовий глобальний спрайт
+src/assets/images/sprite.svg
+
+# Ігноруємо кеш SVG-спрайту
+.svg-cache.json
+
+# Дозволяємо відео
+!src/video/
+!src/video/**/*
+!public/video/
+!public/video/**/*
+
+# --- ФАВІКОНИ (Favicons Automation) ---
+# Ігноруємо все згенероване у папці public/favicons/ (але залишаємо вільним src/)
+public/favicons/*
+!public/favicons/src/
+!public/favicons/src/**/*
+
+# --- КОМПОНЕНТИ (Source of Truth) ---
+# Дозволяємо вихідні іконки спрайтів всередині компонентів
+!src/components/**/images/sprite-src/
+!src/components/**/images/sprite-src/**/*
+
+# --- СЕКРЕТНІ ДАНІ (Sensitive info) ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# --- НАЛАШТУВАННЯ IDE (Editor directories) ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history/
+
+# --- СИСТЕМНІ ФАЙЛИ (System files) ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.bak
+*.tmp
+.fuse_hidden*
+
+# --- ТЕСТИ ТА VITE ---
+coverage/
+.nyc_output/
+*.tsbuildinfo
+vite.config.js.timestamp-*
