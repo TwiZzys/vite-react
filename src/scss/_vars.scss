@@ -1,0 +1,86 @@
+@use "sass:meta";
+@use "sass:list";
+
+//Змінні для режиму розробки
+
+// ОБОВ'ЯЗКОВО з !default, інакше виб'є помилку, яку ти бачиш
+$isProd: false !default;
+$env: "development" !default;
+
+// ДЕБАГ (ти побачиш це в терміналі Mint)
+@if $isProd {
+  @debug "✅ [SASS]: DETECTED PRODUCTION MODE";
+} @else {
+  @debug "⚠️ [SASS]: RUNNING IN DEV MODE (env is: #{$env})";
+}
+
+// 2. МІКСИН БЕЗ ПОМИЛОК 'if-function'
+@mixin bg($module: null, $imageName, $format: jpg, $retina: false) {
+  // Визначаємо базовий шлях залежно від середовища
+  $img-base-path: "/assets/images";
+
+  @if $isProd {
+    $img-base-path: "../images";
+  }
+
+  // Формуємо кінцевий шлях
+  $path: "";
+  @if $module and $module != "" {
+    $path: "#{$img-base-path}/#{$module}/#{$imageName}";
+  } @else {
+    $path: "#{$img-base-path}/#{$imageName}";
+  }
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("#{$path}.#{$format}");
+
+  // Логіка для Build (image-set для modern форматів)
+  @if $isProd {
+    $set: null;
+
+    @if $retina {
+      $set: (
+        url("#{$path}.avif") 1x,
+        url("#{$path}@2x.avif") 2x,
+        url("#{$path}.webp") 1x,
+        url("#{$path}@2x.webp") 2x,
+        url("#{$path}.#{$format}") 1x,
+        url("#{$path}@2x.#{$format}") 2x
+      );
+    } @else {
+      $set: (
+        url("#{$path}.avif") 1x,
+        url("#{$path}.webp") 1x,
+        url("#{$path}.#{$format}") 1x
+      );
+    }
+
+    background-image: -webkit-image-set($set);
+    background-image: image-set($set);
+  }
+}
+
+@mixin media($size) {
+  @media (max-width: #{$size}px) {
+    @content;
+  }
+}
+
+@mixin aspect-ratio($w, $h: null, $fit: contain) {
+  max-width: #{$w}px;
+  width: 100%;
+
+  @if $h {
+    aspect-ratio: #{$w} / #{$h};
+  }
+
+  img {
+    object-fit: $fit;
+  }
+}
+
+// ==== FONTS START ====
+
+// ==== FONTS END ====

@@ -1,0 +1,15 @@
+@use "vars" as *;
+
+//Базові стилі
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: black;
+}
+
+.container {
+  max-width: 1220px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
